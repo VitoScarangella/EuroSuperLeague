@@ -5,7 +5,7 @@
         @include('partials.nav', [ 'current' => 'statistics'])
         <div class="container mt-5">
             <div class="row text-center mb-4">
-                <h3 class="text-uppercase w-100 text-center w-100">Classifica Marcatori</h3>
+                <h3 class="text-uppercase w-100 text-center w-100">Classifica Maratori</h3>
             </div>
             <div class="row shadow-sm mb-2 ranking-row">
                 <div class="w-50 m-auto">
