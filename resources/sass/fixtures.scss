@@ -1,0 +1,36 @@
+.fixtures-page {
+  .match-row {
+    min-height: 50px;
+    margin: 10px 0;
+
+    .away-team {
+      text-align: right;
+    }
+    .team {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .result {
+      font-size: 24px;
+      font-weight: bold;
+      /*display: none;*/
+    }
+  }
+
+  .ranking-row{
+    min-height: 80px;
+
+    .points{
+      font-size: 30px;
+    }
+  }
+
+  .image-container{
+    border-radius: 50%;
+    background: $dark;
+    width: 10%;
+    margin: auto;
+  }
+}
