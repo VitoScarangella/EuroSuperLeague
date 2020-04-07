@@ -3,19 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Match;
-use App\Team;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class HomeController extends Controller
-{
+class HomeController extends Controller {
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
 
@@ -24,37 +21,41 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
+    public function index() {
         return view('home');
     }
 
-    public function ranking()
-    {
-        $teams = DB::table('rankings')
+    public function ranking() {
+        $first_ten_teams = DB::table('rankings')
             ->orderBy('points', 'desc')
-            ->get();
+            ->take(10)->get();
+        $second_ten_teams = DB::table('rankings')
+            ->orderBy('points', 'desc')->skip(9)->take(10)->get();
+
         $current_matchday = Match::where('played', true)->max('matchday_id');
-        return view('ranking', ['teams' => $teams, 'matchday_id' => $current_matchday]);
+
+        return view('ranking', ['first_ten_teams' => $first_ten_teams, 'second_ten_teams' => $second_ten_teams, 'matchday_id' => $current_matchday]);
     }
 
-    public function calendar()
-    {
+    public function calendar() {
         $current_matchday = Match::where('played', true)->max('matchday_id');
+
         return view('calendar', ['matchday_id' => $current_matchday]);
     }
 
-    public function statistics()
-    {
+    public function statistics() {
         return view('statistics');
     }
-    
-    public function fixtures(){
+
+    public function fixtures() {
         $fixtures = Match::where('matchday_id', 5)->get();
+
         return view('fixtures', compact('fixtures'));
     }
-    public function next_match(){
+
+    public function next_match() {
         $next_matches = Match::where('matchday_id', 5)->get();
+
         return view('next_matches', compact('next_matches'));
     }
 
